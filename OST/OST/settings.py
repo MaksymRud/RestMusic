@@ -61,6 +61,13 @@ CORS_ORIGIN_WHITELIST = (
 
 ROOT_URLCONF = 'OST.urls'
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

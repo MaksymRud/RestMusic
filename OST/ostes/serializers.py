@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from ostes.models import OST
+from ostes.models import *
+
 
 class OSTDetailSerializer(serializers.ModelSerializer):
     class Meta:
