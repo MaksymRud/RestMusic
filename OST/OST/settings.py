@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'ostes.apps.OstesConfig',
-    'frontend.apps.FrontendConfig',
+    'frontend',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
