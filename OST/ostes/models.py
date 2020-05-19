@@ -4,14 +4,17 @@ User = get_user_model()
 
 # Create your models here.
 class OST(models.Model):
-    name = models.CharField(max_length = 100)
+    name = models.CharField(max_length = 100, unique = True)
 
     def __str__(self):
         return self.name
 
+    class Meta:
+        managed = True
+
 class Movie(models.Model):
     name = models.CharField(max_length = 100, unique=True)
-    num_seasons = models.IntegerField(blank=True, null=True)
+    num_seasons = models.IntegerField(blank=True)
     descr = models.CharField(max_length=2000, blank=True, null=True)
     ost = models.OneToOneField(OST, on_delete=models.CASCADE)
 
@@ -33,7 +36,7 @@ class Season(models.Model):
     name = models.CharField(max_length = 100)
     number = models.IntegerField()
     descr = models.CharField(max_length=2000, blank=True, null=True)
-    num_episodes = models.IntegerField(blank=True, null=True)
+    num_episodes = models.IntegerField()
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -90,7 +93,11 @@ class EpisodeMusic(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length = 50, unique=True)
     
-    movies = models.ManyToManyField(Movie, through='MoviehasCategories', through_fields=('category', 'movie'))
+    movies = models.ManyToManyField(
+        Movie, 
+        through='MoviehasCategories', 
+        through_fields=('category', 'movie')
+    )
 
     def __str__(self):
         return self.name
