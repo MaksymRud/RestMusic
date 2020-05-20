@@ -32,6 +32,20 @@ class  OSTCreateUpdate  extends  Component {
             });
     }
 
+    handleUpdate(pk){
+        ostService.updateOST(
+            {
+            "pk":  pk,
+            "name":  this.refs.Name.value,
+            }
+            ).then((result)=>{
+                alert("OST updated!");
+            }).catch(()=>{
+                alert('There was an error! Please re-check your form.');
+            });
+    }
+
+
     handleSubmit(event) {
         const { match: { params } } =  this.props;
         if(params  &&  params.pk){
@@ -42,19 +56,6 @@ class  OSTCreateUpdate  extends  Component {
             this.handleCreate();
         }
         event.preventDefault();
-    }
-
-    handleUpdate(pk){
-        ostService.updateOST(
-            {
-            "pk":  pk,
-            "name":  this.refs.Name.value,
-            }
-            ).then((result)=>{
-                alert("Customer updated!");
-            }).catch(()=>{
-                alert('There was an error! Please re-check your form.');
-            });
     }
 
     render() {

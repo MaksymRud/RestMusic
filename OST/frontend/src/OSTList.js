@@ -18,7 +18,7 @@ class  OSTList  extends  Component {
 
     componentDidMount() {
         var  self  =  this;
-        ostService.getOST().then(function (result) {
+        ostService.getAllOST().then(function (result) {
             self.setState({ ostes:  result.data, nextPageURL:  result.nextlink})
         });
     }
@@ -29,7 +29,7 @@ class  OSTList  extends  Component {
             var  newArr  =  self.state.ostes.filter(function(obj) {
                 return  obj.pk  !==  pk;
             });
-            self.setState({ostes:  newArr})
+            self.setState({ ostes:  newArr })
         });
     }
 
@@ -53,12 +53,12 @@ class  OSTList  extends  Component {
                 </thead>
                 <tbody>
                     {this.state.ostes.map( c  =>
-                    <tr  key={c.pk}>
+                    <tr  key = {c.pk}>
                         <td>{c.pk}  </td>
                         <td>{c.name}</td>
                         <td>
-                        <button  onClick={(e)=>  this.handleDelete(e,c.pk) }> Delete</button>
-                        <a  href={"/ost/" + c.pk}> Update</a>
+                            <button  onClick={(e)=>  this.handleDelete(e, c.pk) }> Delete</button>
+                            <a  href={"/ost/" + c.pk}> Update</a>
                         </td>
                     </tr>)}
                 </tbody>

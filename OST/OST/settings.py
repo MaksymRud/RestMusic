@@ -25,7 +25,7 @@ SECRET_KEY = '472e%s=^ennmtah#dhew-=w-6brfp0ij(^qtldoqy$d@n!bdcz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-
-CORS_ORIGIN_ALLOW_ALL=True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -150,3 +148,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = (
+       'http://localhost:3000',
+)
