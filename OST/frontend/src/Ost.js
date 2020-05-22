@@ -5,9 +5,10 @@ export default class OSTService{
 
     constructor(){}
 
-    getAllOST() {
+    async getAllOST() {
         const url = `${API_URL}/api/ost/`;
-        return axios.get(url).then(response => response.data);
+        let resp = await axios.get(url);
+        return resp;
     }
 
     getOSTByURL(link){
@@ -15,13 +16,13 @@ export default class OSTService{
         return axios.get(url).then(response => response.data);
     }
 
-    getOST(pk= '') {
+    getOST(pk) {
         const url = `${API_URL}/api/ost/${pk}`;
         return axios.get(url).then(response => response.data);
     }
 
     deleteOST(ost){
-        const url = `${API_URL}/api/ost/${ost.pk}`;
+        const url = `${API_URL}/api/ost/${ost.pk}/`;
         return axios.delete(url);
     }
 
@@ -31,7 +32,7 @@ export default class OSTService{
     }
 
     updateOST(ost){
-        const url = `${API_URL}/api/ost/${ost.pk}`;
+        const url = `${API_URL}/api/ost/${ost.pk}/`;
         return axios.put(url,ost);
     }
 

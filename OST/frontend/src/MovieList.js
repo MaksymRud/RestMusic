@@ -1,15 +1,15 @@
 import  React, { Component } from  'react';
 
-import OSTService from './Ost';
+import MovieService from './Ost';
 
-const ostService = new OSTService();
+const MovieService = new OSTService();
 
-class  OSTList  extends  Component {
+class  MovieList  extends  Component {
 
     constructor(props) {
         super(props);
         this.state  = {
-            ostes: [],
+            movies: [],
             nextPageURL:  ''
         };
         this.nextPage  =  this.nextPage.bind(this);
@@ -18,25 +18,25 @@ class  OSTList  extends  Component {
 
     componentDidMount() {
         var  self  =  this;
-        ostService.getAllOST().then(function (result) {
-            self.setState({ ostes:  result.data, nextPageURL:  result.nextlink})
+        MovieService.getAllMovies().then(function (result) {
+            self.setState({ movies:  result.data, nextPageURL:  result.nextlink})
         });
     }
 
     handleDelete(e,pk){
         var  self  =  this;
-        ostService.deleteOST({pk :  pk}).then(()=>{
-            var  newArr  =  self.state.ostes.filter(function(obj) {
+        MovieService.deleteMovie({pk :  pk}).then(()=>{
+            var  newArr  =  self.state.movies.filter(function(obj) {
                 return  obj.id  !==  pk;
             });
-            self.setState({ ostes:  newArr })
+            self.setState({ movies:  newArr })
         });
     }
 
     nextPage(){
         var  self  =  this;
-        ostService.getOSTByURL(this.state.nextPageURL).then((result) => {
-            self.setState({ ostes:  result.data, nextPageURL:  result.nextlink})
+        MovieService.getMovieByURL(this.state.nextPageURL).then((result) => {
+            self.setState({ movies:  result.data, nextPageURL:  result.nextlink})
         });
     }
 
@@ -49,16 +49,24 @@ class  OSTList  extends  Component {
                 <tr>
                     <th>id</th>
                     <th>Name</th>
+                    <th>Num Seasons</th>
+                    <th>Descr</th>
+                    <th>Category</th>
+                    <th>OST</th>
                 </tr>
                 </thead>
                 <tbody>
-                    {this.state.ostes.map( c  =>
+                    {this.state.movies.map( c  =>
                     <tr  key = {c.id}>
                         <td>{c.id}  </td>
                         <td>{c.name}</td>
+                        <td>{c.num_seasons}</td>
+                        <td>{c.descr}</td>
+                        <td>{c.categories}</td>
+                        <td>{c.ost.name}</td>
                         <td>
                             <button  onClick={(e)=>  this.handleDelete(e, c.id) }> Delete</button>
-                            <a  href={"/ost/" + c.id}> Update</a>
+                            <a  href={"/movie/" + c.id}> Update</a>
                         </td>
                     </tr>)}
                 </tbody>
@@ -68,4 +76,4 @@ class  OSTList  extends  Component {
     }
 }
 
-export  default  OSTList;
+export  default  MovieList;

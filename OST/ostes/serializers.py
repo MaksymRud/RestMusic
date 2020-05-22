@@ -14,7 +14,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class MovieSerializer(serializers.ModelSerializer):
     ost = OSTSerializer(required = True)
-    categories = CategorySerializer(required = True, many = True)
+    categories = CategorySerializer(required = False, many = True)
 
     class Meta:
         model = Movie

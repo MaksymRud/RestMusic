@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.core.validators import RegexValidator
 User = get_user_model()
 
 # Create your models here.
 class OST(models.Model):
-    name = models.CharField(max_length = 100, unique = True)
-
+    name = models.CharField(max_length = 100, unique = True, validators = [RegexValidator('(OST)$', message = 'name must end with "OST"', code = 'invalid_name')])
+    
     def __str__(self):
         return self.name
 
