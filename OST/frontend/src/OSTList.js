@@ -13,35 +13,30 @@ class  OSTList  extends  Component {
             nextPageURL:  ''
         };
         this.nextPage  =  this.nextPage.bind(this);
-        this.handleDelete  =  this.handleDelete.bind(this);
     }
 
     componentDidMount() {
-        var  self  =  this;
-        ostService.getAllOST().then(function (result) {
-            self.setState({ ostes:  result.data, nextPageURL:  result.nextlink})
+        ostService.getAllOST().then((result) => {
+            this.setState({ ostes:  result.data, nextPageURL:  result.nextlink})
         });
     }
 
     handleDelete(e,pk){
-        var  self  =  this;
-        ostService.deleteOST({pk :  pk}).then(()=>{
-            var  newArr  =  self.state.ostes.filter(function(obj) {
+        ostService.deleteOST({pk}).then(()=>{
+            var  newArr  =  this.state.ostes.filter(function(obj) {
                 return  obj.id  !==  pk;
             });
-            self.setState({ ostes:  newArr })
+            this.setState({ ostes:  newArr })
         });
     }
 
     nextPage(){
-        var  self  =  this;
         ostService.getOSTByURL(this.state.nextPageURL).then((result) => {
-            self.setState({ ostes:  result.data, nextPageURL:  result.nextlink})
+            this.setState({ ostes:  result.data, nextPageURL:  result.nextlink})
         });
     }
 
     render() {
-
         return (
         <div  className="ost--list">
             <table  className="table">

@@ -33,6 +33,7 @@ export default class OSTService{
 
     updateOST(ost){
         const url = `${API_URL}/api/ost/${ost.pk}/`;
+        console.log(ost);
         return axios.put(url,ost);
     }
 

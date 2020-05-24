@@ -35,7 +35,7 @@ class  OSTCreateUpdate  extends  Component {
     handleUpdate(pk){
         ostService.updateOST(
             {
-            "id":  pk,
+            pk,
             "name":  this.refs.Name.value,
             }
             ).then((result)=>{
@@ -45,8 +45,8 @@ class  OSTCreateUpdate  extends  Component {
             });
     }
 
-
     handleSubmit(event) {
+        event.preventDefault();
         const { match: { params } } =  this.props;
         if(params  &&  params.pk){
             this.handleUpdate(params.pk);
@@ -55,7 +55,6 @@ class  OSTCreateUpdate  extends  Component {
         {
             this.handleCreate();
         }
-        event.preventDefault();
     }
 
     render() {
